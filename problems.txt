@@ -1,0 +1,14 @@
+1. Pulling wrong DB container image:
+   - Maven build tests were failing. In the docker-compose.yml file, i was pulling the mysql:8.3.0 image
+   - The testcontainer library created the testcontainers config file which returned the mysql:latest image, which created a conflict
+   - Fixed by changing the image name to mysql:8.3.0
+
+2. Flyway migration not working:
+   - Flyway migration files (V1__init.sql) should only be run once. Whenever i started the application, it would fail, because the flyway_schema_history table was already created.
+   - Fixed by dropping the flyway_schema_history table in mysql workbench.
+
+3. Port already in use:
+   - Both order-service and inventory-service use mysql docker containers and they were using the same port 3306:3306
+   - This caused the application to fail to start.
+   - Fixed by changing the port to 3307 and 3308 for the services respectively, since 3306 is used by mySQL server.
+   - Also, I had to make new connections for each port in mySQL workbench for each service, since they were listening on different ports.
