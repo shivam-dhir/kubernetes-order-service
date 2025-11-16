@@ -12,3 +12,4 @@
    - This caused the application to fail to start.
    - Fixed by changing the port to 3307 and 3308 for the services respectively, since 3306 is used by mySQL server.
    - Also, I had to make new connections for each port in mySQL workbench for each service, since they were listening on different ports.
+   - Need to learn networking/os/dbms in depth. Very helpful in understanding Docker & Kubernetes.
